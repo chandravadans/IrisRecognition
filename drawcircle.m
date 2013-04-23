@@ -1,5 +1,5 @@
-%function to cut a ring centered at C inner radius rl and outer radius rh,
-%out from an image I
+%function to generate the pixels on the boundary of a regular polygon of n sides
+%the polygon approximates a circle of radius r and is used to draw the circle
 %INPUTS:
 %1.I:Image to be processed
 %2.C(x,y):Centre coordinates of the circumcircle
@@ -11,8 +11,9 @@
 %4.r:radius of circumcircle
 %OUTPUT:
 %O:Image with circle
-function [O]=getring(I,C,rl,rh,n)
-if nargin==4
+
+function [O]=drawcircle(I,C,r,n)
+if nargin==3
     n=600;
 end
 theta=(2*pi)/n;% angle subtended at the centre by the sides
@@ -20,9 +21,8 @@ theta=(2*pi)/n;% angle subtended at the centre by the sides
 %positive angle ic ccw
 rows=size(I,1);
 cols=size(I,2);
-angle=0:theta:2*pi;
+angle=theta:theta:2*pi;
 %to improve contrast and help in detection
-for r=rl:rh
 x=C(1)-r*sin(angle);%the negative sign occurs because of the particular choice of coordinate system
 y=C(2)+r*cos(angle);
 if any(x>=rows)|any(y>=cols)|any(x<=1)|any(y<=1)%if circle is out of bounds return image itself
@@ -30,6 +30,6 @@ if any(x>=rows)|any(y>=cols)|any(x<=1)|any(y<=1)%if circle is out of bounds retu
     return
 end
 for i=1:n
-O(round(x(i)),round(y(i)))=I(round(x(i)),round(y(i)));
+    I(round(x(i)),round(y(i)))=1;
 end
-end
+O=I;

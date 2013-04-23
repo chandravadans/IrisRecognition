@@ -11,26 +11,26 @@ b=double(b);
 p=size(b,1);        %p's max value is 240
 q=size(b,2);        %q's max value is 320
 for i=2:p-1
-   for j=1:q-scalewin
-      ssum=sum(b(i,j:j+scalewin));
-     if(xmin>ssum)
-        xmin=ssum;
-        x=i;
-     end
-   end
+    for j=1:q-scalewin
+        ssum=sum(b(i,j:j+scalewin));
+        if(xmin>ssum)
+            xmin=ssum;
+            x=i;
+        end
+    end
 end
 ymin=255*scalewin;
 
 ssum=0;
 for i=2:q-1
-      for j=2:p-scalewin
-       ssum=sum(b(j:j+scalewin,i));
-      if(ssum<ymin)
-         ymin=ssum;
-         y=i;
-      end
-   end
- end
+    for j=2:p-scalewin
+        ssum=sum(b(j:j+scalewin,i));
+        if(ssum<ymin)
+            ymin=ssum;
+            y=i;
+        end
+    end
+end
 %m=1;n=1;
 
 %error checking start
@@ -67,7 +67,7 @@ if(y-75<0)
 else
     ly=abs(y-75);
 end
-%error check end   
+%error check end
 if uy<ly
     temp=uy;
     uy=ly;
@@ -78,10 +78,10 @@ if ux<lx
     temp=ux;
     ux=lx;
     lx=temp;
-end  
-  
+end
 
-c=b(lx:ux,ly:uy); 
+
+c=b(lx:ux,ly:uy);
 out=c;
 time=toc;
 

@@ -18,7 +18,7 @@ R=rmin:rmax;
 maxrad=zeros(rows,cols);
 maxb=zeros(rows,cols);
 for i=(x-5):(x+5)
-for j=(y-5):(y+5)
+    for j=(y-5):(y+5)
         [b,r,blur]=partiald(im,[i,j],rmin,rmax,0.5,600,option);
         maxrad(i,j)=r;
         maxb(i,j)=b;
@@ -31,4 +31,4 @@ cp=[X,Y,radius];
 
 
 
-        
+

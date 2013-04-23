@@ -2,7 +2,7 @@
 % unwraping the circular region into a rectangular block of
 % constant dimensions.
 %
-% Usage: 
+% Usage:
 % [polar_array, polar_noise] = normaliseiris(image, x_iris, y_iris, r_iris,...
 % x_pupil, y_pupil, r_pupil,image_filename, radpixels, angulardiv)
 %
@@ -20,19 +20,14 @@
 %                         boundary
 % r_pupil               - the radius of the circle defining the pupil
 %                         boundary
-% image_filename     - original filename of the input eye image
+% image_filename        - original filename of the input eye image
 % radpixels             - radial resolution, defines vertical dimension of
 %                         normalised representation
 % angulardiv            - angular resolution, defines horizontal dimension
 %                         of normalised representation
-%
-% Output:
-% polar_array
-% polar_noise
-
 
 function [ring,polar_array] = normaliseiris(image, x_iris, y_iris, r_iris,...
-x_pupil, y_pupil, r_pupil,image_filename, radpixels, angulardiv)
+    x_pupil, y_pupil, r_pupil,image_filename, radpixels, angulardiv)
 
 orig=image;
 
@@ -109,7 +104,7 @@ rmat  = rmat(2:(radiuspixels-1), :);
 xcosmat = ones(radiuspixels-2,1)*cos(theta);
 xsinmat = ones(radiuspixels-2,1)*sin(theta);
 
-xo = rmat.*xcosmat;    
+xo = rmat.*xcosmat;
 yo = rmat.*xsinmat;
 
 xo =double( x_pupil+xo);
@@ -163,7 +158,6 @@ if ox == 0
 else
     phi = atan(oy/ox);
 end
-
 b = sgn.*cos(pi - phi - theta);
 
 % calculate radius around the iris as a function of the angle
@@ -186,7 +180,7 @@ rmat  = rmat(2:(radiuspixels-1), :);
 xcosmat = ones(radiuspixels-2,1)*cos(theta);
 xsinmat = ones(radiuspixels-2,1)*sin(theta);
 
-xo = rmat.*xcosmat;    
+xo = rmat.*xcosmat;
 yo = rmat.*xsinmat;
 
 xo =double( x_pupil+xo);

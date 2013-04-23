@@ -40,14 +40,14 @@ cols=size(I,2);
 s=size(X,1);
 for k=1:s %
     if (X(k)>rmin)&(Y(k)>rmin)&(X(k)<=(rows-rmin))&(Y(k)<(cols-rmin))
-            A=I((X(k)-1):(X(k)+1),(Y(k)-1):(Y(k)+1));
-            M=min(min(A));
-            %this process scans the neighbourhood of the selected pixel
-            %to check if it is a local minimum
-           if I(X(k),Y(k))~=M
-              X(k)=NaN;
-              Y(k)=NaN;
-           end
+        A=I((X(k)-1):(X(k)+1),(Y(k)-1):(Y(k)+1));
+        M=min(min(A));
+        %this process scans the neighbourhood of the selected pixel
+        %to check if it is a local minimum
+        if I(X(k),Y(k))~=M
+            X(k)=NaN;
+            Y(k)=NaN;
+        end
     end
 end
 v=find(isnan(X));
@@ -56,8 +56,8 @@ Y(v)=[];
 %deletes all pixels that are NOT local minima(that have been set to NaN)
 index=find((X<=rmin)|(Y<=rmin)|(X>(rows-rmin))|(Y>(cols-rmin)));
 X(index)=[];
-Y(index)=[];  
-%This process deletes all pixels that are so close to the border 
+Y(index)=[];
+%This process deletes all pixels that are so close to the border
 %that they could not possibly be the centre coordinates.
 N=size(X,1);
 %recompute the size after deleting unnecessary elements
@@ -75,7 +75,7 @@ ci=search(I,rmin,rmax,x,y,'iris');%fine search
 %finds the maximum value of blur by scanning all the centre coordinates
 ci=ci/scale;
 %the function search searches for the centre of the pupil and its radius
-%by scanning a 10*10 window around the iris centre for establishing 
+%by scanning a 10*10 window around the iris centre for establishing
 %the pupil's centre and hence its radius
 cp=search(I,round(0.1*r),round(0.8*r),ci(1)*scale,ci(2)*scale,'pupil');%Ref:Daugman's paper that sets biological limits on the relative sizes of the iris and pupil
 cp=cp/scale;
